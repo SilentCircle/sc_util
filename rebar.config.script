@@ -1,0 +1,40 @@
+ValTarget = fun(Target) ->
+                    TargAtom = list_to_atom(Target),
+                    lists:member(TargAtom, ['github', 'gitlab', 'stash']) orelse
+                    throw({bad_edown_target, Target}),
+                    TargAtom
+            end.
+
+GetEDocOpts = fun(Config) ->
+                      case lists:keyfind(edoc_opts, 1, Config) of
+                          false ->
+                              [];
+                          {edoc_opts, PL} ->
+                              PL
+                      end
+              end.
+
+CFG1 = case os:getenv("EDOWN_TARGET") of
+    false ->
+        CONFIG;
+    [] ->
+        CONFIG;
+    Target ->
+        EDocOpts = lists:keystore(edown_target, 1, GetEDocOpts(CONFIG),
+                                  {edown_target, ValTarget(Target)}),
+        lists:keystore(edoc_opts, 1, CONFIG, {edoc_opts, EDocOpts})
+end.
+
+Cfg2 = case os:getenv("EDOWN_TOP_LEVEL_README_URL") of
+    false ->
+        CFG1;
+    [] ->
+        CFG1;
+    URL ->
+        EDocOpts2 = lists:keystore(top_level_readme, 1, GetEDocOpts(CFG1),
+                                  {top_level_readme, {"./README.md", URL}}),
+        lists:keystore(edoc_opts, 1, CFG1, {edoc_opts, EDocOpts2})
+end.
+
+Cfg2.
+

@@ -1,0 +1,12 @@
+{application, sc_util,
+ [
+  {description, "General utility library"},
+  {vsn, {cmd, "echo `cat APP_VERSION`"}},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  jsx
+                 ]},
+  {env, []}
+ ]}.
