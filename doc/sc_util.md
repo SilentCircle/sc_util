@@ -240,8 +240,7 @@ posix_time() -&gt; <a href="sc_types.md#type-posix_time">sc_types:posix_time()</
 <br />
 
 Return current POSIX time in seconds since the epoch.
-This is calculated from `os:timestamp/1`. Microseconds are rounded
-to the nearest second.
+This is a synonym for `erlang:system_time(seconds)`.
 
 <a name="posix_time-1"></a>
 

@@ -362,8 +362,7 @@ exported_types(Beam) when is_list(Beam) orelse
 
 %%--------------------------------------------------------------------
 %% @doc Return current POSIX time in seconds since the epoch.
-%% This is calculated from `os:timestamp/1'. Microseconds are rounded
-%% to the nearest second.
+%% This is a synonym for `erlang:system_time(seconds)'.
 %% @end
 %%--------------------------------------------------------------------
 -spec posix_time() -> sc_types:posix_time().
