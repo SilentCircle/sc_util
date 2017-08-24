@@ -239,7 +239,7 @@ select_highest_prio(SortedRRs) ->
     when RRs :: rrs(), RR :: rr().
 select_randomly_by_weight(RRs) ->
     {WeightedRRs, Sum} = weighted_sums(RRs),
-    Rnd = random:uniform(Sum + 1) - 1, % range 0..N-1
+    Rnd = rand:uniform(Sum + 1) - 1, % range 0..N-1
     find_first_greater_or_equal(Rnd, WeightedRRs).
 
 
